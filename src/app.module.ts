@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MaterialesModule } from './materiales/materiales.module';
 import { ProyectosModule } from './proyectos/proyectos.module';
 import { DepartamentosModule } from './departamentos/departamentos.module';
+import { MunicipiosModule } from './municipios/municipios.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { DepartamentosModule } from './departamentos/departamentos.module';
     MaterialesModule,
     ProyectosModule,
     DepartamentosModule,
+    MunicipiosModule,
   ],
   controllers: [],
   providers: [],
