@@ -18,7 +18,7 @@ import { Departamento } from './entities/departamento.entity';
 export class DepartamentosController {
   constructor(private readonly departamentosService: DepartamentosService) {}
 
-  // 🔹 POST: Crear un nuevo departamento
+  // POST: Crear un nuevo departamento
   @ApiOperation({ summary: 'Crear un departamento' })
   @ApiResponse({
     status: 201,
@@ -41,7 +41,7 @@ export class DepartamentosController {
     return this.departamentosService.findAll();
   }
 
-  // 🔹 GET: Obtener un departamento por ID
+  // GET: Obtener un departamento por ID
   @ApiOperation({ summary: 'Obtener un departamento por su ID' })
   @ApiResponse({
     status: 200,
@@ -54,7 +54,7 @@ export class DepartamentosController {
     return this.departamentosService.findOne(+id);
   }
 
-  // 🔹 PATCH: Actualizar un departamento por ID
+  // PATCH: Actualizar un departamento por ID
   @ApiOperation({ summary: 'Actualizar un departamento por su ID' })
   @ApiResponse({
     status: 200,
@@ -70,7 +70,7 @@ export class DepartamentosController {
     return this.departamentosService.update(+id, updateDepartamentoDto);
   }
 
-  // 🔹 DELETE: Eliminar un departamento por ID
+  // DELETE: Eliminar un departamento por ID
   @ApiOperation({ summary: 'Eliminar un departamento por su ID' })
   @ApiResponse({ status: 200, description: 'Departamento eliminado con éxito' })
   @ApiResponse({ status: 404, description: 'Departamento no encontrado' })

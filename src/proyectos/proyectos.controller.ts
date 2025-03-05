@@ -18,7 +18,7 @@ import { Proyecto } from './entities/proyecto.entity';
 export class ProyectosController {
   constructor(private readonly proyectosService: ProyectosService) {}
 
-  // 🔹 POST: Crear un nuevo proyecto
+  // POST: Crear un nuevo proyecto
   @ApiOperation({ summary: 'Crear un proyecto' })
   @ApiResponse({
     status: 201,
@@ -41,7 +41,7 @@ export class ProyectosController {
     return this.proyectosService.findAll();
   }
 
-  // 🔹 GET: Obtener un proyecto por ID
+  // GET: Obtener un proyecto por ID
   @ApiOperation({ summary: 'Obtener un proyecto por su ID' })
   @ApiResponse({
     status: 200,
@@ -54,7 +54,7 @@ export class ProyectosController {
     return this.proyectosService.findOne(+id);
   }
 
-  // 🔹 PATCH: Actualizar un proyecto por ID
+  // PATCH: Actualizar un proyecto por ID
   @ApiOperation({ summary: 'Actualizar un proyecto por su ID' })
   @ApiResponse({
     status: 200,
@@ -70,7 +70,7 @@ export class ProyectosController {
     return this.proyectosService.update(+id, updateProyectoDto);
   }
 
-  // 🔹 DELETE: Eliminar un proyecto por ID
+  // DELETE: Eliminar un proyecto por ID
   @ApiOperation({ summary: 'Eliminar un proyecto por su ID' })
   @ApiResponse({ status: 200, description: 'proyecto eliminado con éxito' })
   @ApiResponse({ status: 404, description: 'proyecto no encontrado' })

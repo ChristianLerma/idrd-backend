@@ -18,7 +18,7 @@ import { Municipio } from './entities/municipio.entity';
 export class MunicipiosController {
   constructor(private readonly municipiosService: MunicipiosService) {}
 
-  // 🔹 POST: Crear un nuevo municipio
+  // POST: Crear un nuevo municipio
   @ApiOperation({ summary: 'Crear un municipio' })
   @ApiResponse({
     status: 201,
@@ -41,7 +41,7 @@ export class MunicipiosController {
     return this.municipiosService.findAll();
   }
 
-  // 🔹 GET: Obtener un municipio por ID
+  // GET: Obtener un municipio por ID
   @ApiOperation({ summary: 'Obtener un municipio por su ID' })
   @ApiResponse({
     status: 200,
@@ -54,7 +54,7 @@ export class MunicipiosController {
     return this.municipiosService.findOne(+id);
   }
 
-  // 🔹 PATCH: Actualizar un municipio por ID
+  // PATCH: Actualizar un municipio por ID
   @ApiOperation({ summary: 'Actualizar un municipio por su ID' })
   @ApiResponse({
     status: 200,
@@ -70,7 +70,7 @@ export class MunicipiosController {
     return this.municipiosService.update(+id, updateMunicipioDto);
   }
 
-  // 🔹 DELETE: Eliminar un municipio por ID
+  // DELETE: Eliminar un municipio por ID
   @ApiOperation({ summary: 'Eliminar un municipio por su ID' })
   @ApiResponse({ status: 200, description: 'municipio eliminado con éxito' })
   @ApiResponse({ status: 404, description: 'municipio no encontrado' })

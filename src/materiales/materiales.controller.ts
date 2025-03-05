@@ -18,7 +18,7 @@ import { Material } from './entities/material.entity';
 export class MaterialesController {
   constructor(private readonly materialesService: MaterialesService) {}
 
-  // 🔹 POST: Crear un nuevo material
+  // POST: Crear un nuevo material
   @ApiOperation({ summary: 'Crear un material' })
   @ApiResponse({
     status: 201,
@@ -41,7 +41,7 @@ export class MaterialesController {
     return this.materialesService.findAll();
   }
 
-  // 🔹 GET: Obtener un material por ID
+  // GET: Obtener un material por ID
   @ApiOperation({ summary: 'Obtener un material por su ID' })
   @ApiResponse({
     status: 200,
@@ -54,7 +54,7 @@ export class MaterialesController {
     return this.materialesService.findOne(+id);
   }
 
-  // 🔹 PATCH: Actualizar un material por ID
+  // PATCH: Actualizar un material por ID
   @ApiOperation({ summary: 'Actualizar un material por su ID' })
   @ApiResponse({
     status: 200,
@@ -70,7 +70,7 @@ export class MaterialesController {
     return this.materialesService.update(+id, updateMaterialDto);
   }
 
-  // 🔹 DELETE: Eliminar un material por ID
+  // DELETE: Eliminar un material por ID
   @ApiOperation({ summary: 'Eliminar un material por su ID' })
   @ApiResponse({ status: 200, description: 'material eliminado con éxito' })
   @ApiResponse({ status: 404, description: 'material no encontrado' })
