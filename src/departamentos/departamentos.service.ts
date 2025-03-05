@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDepartamentoDto } from './dto/create-departamento.dto';
 import { UpdateDepartamentoDto } from './dto/update-departamento.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,21 +17,33 @@ export class DepartamentosService {
   }
 
   async findAll() {
-    return await this.departamentoRepository.find();
+    return await this.departamentoRepository.find({
+      relations: ['municipios'],
+    });
   }
 
   async findOne(id: number) {
-    return await this.departamentoRepository.findOneBy({ id });
+    const departamento = await this.departamentoRepository.findOne({
+      where: { id: id },
+      relations: ['municipios'],
+    });
+
+    if (!departamento) {
+      throw new NotFoundException('Departamento no encontrado');
+    }
+    return departamento;
   }
 
   async update(id: number, updateDepartamentoDto: UpdateDepartamentoDto) {
-    return await this.departamentoRepository.update(
-      { id },
-      updateDepartamentoDto,
-    );
+    await this.departamentoRepository.update({ id }, updateDepartamentoDto);
+    return this.findOne(id);
   }
 
   async remove(id: number) {
-    return await this.departamentoRepository.softDelete({ id });
+    const result = await this.departamentoRepository.softDelete({ id });
+    if (result.affected === 0) {
+      throw new NotFoundException('Departamento no encontrado');
+    }
+    return { message: 'Departamento eliminado con éxito' };
   }
 }

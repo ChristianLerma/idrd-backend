@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMaterialDto } from './dto/create-material.dto';
 import { UpdateMaterialDto } from './dto/update-material.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -25,10 +25,15 @@ export class MaterialesService {
   }
 
   async update(id: number, updateMaterialDto: UpdateMaterialDto) {
-    return await this.materialRepository.update({ id }, updateMaterialDto);
+    await this.materialRepository.update({ id }, updateMaterialDto);
+    return this.findOne(id);
   }
 
   async remove(id: number) {
-    return await this.materialRepository.softDelete({ id });
+    const result = await this.materialRepository.softDelete({ id });
+    if (result.affected === 0) {
+      throw new NotFoundException('Material no encontrado');
+    }
+    return { message: 'Material eliminado con éxito' };
   }
 }

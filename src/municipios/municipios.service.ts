@@ -1,19 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateMunicipioDto } from './dto/create-municipio.dto';
 import { UpdateMunicipioDto } from './dto/update-municipio.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Municipio } from './entities/municipio.entity';
 import { Repository } from 'typeorm';
+import { Departamento } from 'src/departamentos/entities/departamento.entity';
 
 @Injectable()
 export class MunicipiosService {
   constructor(
     @InjectRepository(Municipio)
-    private municipioRepository: Repository<Municipio>,
+    private readonly municipioRepository: Repository<Municipio>,
+    @InjectRepository(Departamento)
+    private readonly departamentoRepository: Repository<Departamento>,
   ) {}
 
   async create(createMunicipioDto: CreateMunicipioDto) {
-    return await this.municipioRepository.save(createMunicipioDto);
+    const departamento = await this.departamentoRepository.findOneBy({
+      id: createMunicipioDto.departamentoId,
+    });
+
+    if (!departamento) {
+      throw new BadRequestException('El Departamento no existe');
+    }
+
+    return await this.municipioRepository.save({
+      ...createMunicipioDto,
+      departamento,
+    });
   }
 
   async findAll() {
@@ -25,10 +43,15 @@ export class MunicipiosService {
   }
 
   async update(id: number, updateMunicipioDto: UpdateMunicipioDto) {
-    return await this.municipioRepository.update({ id }, updateMunicipioDto);
+    await this.municipioRepository.update({ id }, updateMunicipioDto);
+    return this.findOne(id);
   }
 
   async remove(id: number) {
-    return await this.municipioRepository.softDelete({ id });
+    const result = await this.municipioRepository.softDelete({ id });
+    if (result.affected === 0) {
+      throw new NotFoundException('Municipio no encontrado');
+    }
+    return { message: 'Municipio eliminado con éxito' };
   }
 }
