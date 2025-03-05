@@ -33,6 +33,5 @@ export class CreateMaterialDto {
     example: '1000',
   })
   @IsNumber()
-  @MinLength(1)
   precio: number;
 }

@@ -1,10 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ProyectoMaterial } from 'src/proyecto-material/entities/proyecto-material.entity';
 import {
   Column,
   Entity,
   DeleteDateColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -40,4 +42,10 @@ export class Material {
   @ApiProperty({ description: 'Fecha de eliminación del registro' })
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(
+    () => ProyectoMaterial,
+    (proyectoMaterial) => proyectoMaterial.material,
+  )
+  proyectoMateriales: ProyectoMaterial[];
 }
