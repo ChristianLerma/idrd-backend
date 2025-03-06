@@ -10,6 +10,7 @@ import { Repository } from 'typeorm';
 import { Proyecto } from './entities/proyecto.entity';
 import { Departamento } from 'src/departamentos/entities/departamento.entity';
 import { Municipio } from 'src/municipios/entities/municipio.entity';
+import { omitBy, isNil } from 'lodash';
 
 @Injectable()
 export class ProyectosService {
@@ -55,8 +56,42 @@ export class ProyectosService {
   }
 
   async update(id: number, updateProyectoDto: UpdateProyectoDto) {
-    await this.proyectoRepository.update({ id }, updateProyectoDto);
-    return this.findOne(id);
+    const proyecto = await this.proyectoRepository.findOne({ where: { id } });
+
+    if (!proyecto)
+      throw new NotFoundException(`Proyecto con id ${id} no encontrado`);
+
+    // Verificar y asignar el departamento si viene en el DTO
+    if (typeof updateProyectoDto.departamentoId === 'number') {
+      const departamento = await this.departamentoRepository.findOne({
+        where: { id: updateProyectoDto.departamentoId },
+      });
+      if (!departamento)
+        throw new BadRequestException('Departamento no encontrado');
+      proyecto.departamento = departamento;
+    }
+
+    // Verificar y asignar el municipio si viene en el DTO
+    if (typeof updateProyectoDto.municipioId === 'number') {
+      const municipio = await this.municipioRepository.findOne({
+        where: { id: updateProyectoDto.municipioId },
+      });
+      if (!municipio) throw new BadRequestException('Municipio no encontrado');
+      proyecto.municipio = municipio;
+    }
+
+    // Validar y asignar solo los campos válidos
+    Object.keys(updateProyectoDto).forEach((key) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const value = updateProyectoDto[key];
+
+      if (value !== undefined && value !== null) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        (proyecto as any)[key] = value; // Usar `as any` para evitar errores de tipo en la asignación
+      }
+    });
+
+    return await this.proyectoRepository.save(proyecto);
   }
 
   async remove(id: number) {
