@@ -1,4 +1,4 @@
-<h1> Backend en NestJs (Flowbite, tailwindcss) </h1>
+<h1> Backend en NestJs () </h1>
 
 ## SWAGGER
 ![imagen](https://github.com/user-attachments/assets/1641e766-1740-4569-96ec-8f39b3a78243)
