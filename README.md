@@ -6,6 +6,9 @@
 ![imagen](https://github.com/user-attachments/assets/2bc1b521-dc3d-4c57-96c1-1f0981dc28bb)
 ![imagen](https://github.com/user-attachments/assets/d79b9174-21d7-4f69-9473-285af6f66264)
 
+## Docker
+![imagen](https://github.com/user-attachments/assets/42d3b71c-a343-449a-a0db-fc31d4a5a3a4)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
