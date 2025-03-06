@@ -1,3 +1,11 @@
+<h1> Backend en NestJs (Flowbite, tailwindcss) </h1>
+
+## SWAGGER
+![imagen](https://github.com/user-attachments/assets/1641e766-1740-4569-96ec-8f39b3a78243)
+
+![imagen](https://github.com/user-attachments/assets/2bc1b521-dc3d-4c57-96c1-1f0981dc28bb)
+![imagen](https://github.com/user-attachments/assets/d79b9174-21d7-4f69-9473-285af6f66264)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
