@@ -1,6 +1,9 @@
 <h1> Backend en NestJs () </h1>
 
 ## SWAGGER
+
+http://localhost:3000/api
+
 ![imagen](https://github.com/user-attachments/assets/1641e766-1740-4569-96ec-8f39b3a78243)
 
 ![imagen](https://github.com/user-attachments/assets/2bc1b521-dc3d-4c57-96c1-1f0981dc28bb)
